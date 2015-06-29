@@ -15,11 +15,13 @@ angular.module('Authentication')
             console.log('...in controller LoginController ', $scope.username, $scope.userid);
             AuthenticationService.Login($scope.username, $scope.password, $scope.userid, function (response) {
                 if (response.username === $scope.username) {
-                    console.log("...yes........");
+
+                    console.log("...yes........"); ///
+                    
                     AuthenticationService.SetCredentials($scope.username, $scope.password, $scope.userid);
                     $location.path('/');
                 } else {
-                    console.log("...no........");
+                    console.log("...no........"); ///
                     $scope.error = response.message;
                     //AuthenticationService.ClearCredentials();
                     $scope.dataLoading = false;

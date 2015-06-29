@@ -1,8 +1,8 @@
 ﻿'use strict';
 
-angular.module('Authentication')
+angular.module('Login')
 
-.factory('AuthenticationService',
+.factory('LoginService',
     ['Base64', '$http', '$cookieStore', '$rootScope', '$timeout',
     function (Base64, $http, $cookieStore, $rootScope, $timeout) {
         var service = {};
@@ -10,14 +10,15 @@ angular.module('Authentication')
         service.Login = function (username, password, userid, callback) {
             $http.get('/wordpress/wp-json/users/' + userid )
                 .success(function (resp) {
-                    console.log('GET success/users');
-                    console.log(resp);
+                    console.log('GET success/users'); ///
+                    console.log(resp); ///
                     $http.get('/wordpress/wp-json/users/' + userid)
                         .success(function (response) {
-                            console.log("GET success!/me-id");
-                            console.log('response.username(from wp)', response.username);
-                            console.log('response.ID(from wp)', response.ID);
-                            console.log(response);
+                            console.log("GET success!/me-id"); ///
+                            console.log('response.username(from wp)', response.username); ///
+                            console.log('response.ID(from wp)', response.ID); ///
+                            console.log(response); ///
+
                             callback(response);
                         })
                        .error(function(res) {
@@ -30,14 +31,11 @@ angular.module('Authentication')
                     console.log("GET failed", res);
 
                 });
-           };
-
-           
-           
+           };           
 
         service.SetCredentials = function (username, password, userid) {
             var authdata = Base64.encode(username + ':' + password);
-            //console.log(authdata);
+            //console.log(authdata); ///
             $rootScope.globals = {
                 currentUser: {
                     userid: userid,
@@ -48,19 +46,19 @@ angular.module('Authentication')
 
             $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
             $cookieStore.put('globals', $rootScope.globals);
-            console.log('authdata= ', $rootScope.globals.currentUser.authdata);
+            console.log('authdata= ', $rootScope.globals.currentUser.authdata); ///
         };
 
         service.ClearCredentials = function () {
             $rootScope.globals = {};
             $cookieStore.remove('globals');
             $http.defaults.headers.common.Authorization = 'Basic ';
-            //alert('hey');
+            //alert('service.ClearCredentials');
         };
 
         service.StoreUser = function () {
             alert('Hi');
-            //alert('hey');
+            //alert('service.StoreUser');
         };
 
 
@@ -154,61 +152,3 @@ angular.module('Authentication')
 
     /* jshint ignore:end */
 });
-
-
-//--------------------
-
-// angular.module('Home')
-
-// .factory('HomeService',
-//     ['$http', '$cookieStore', '$rootScope', 
-//     function ($http, $cookieStore, $rootScope) {
-//         var service = {};
-
-//         service.getUser = function ( callback) {
-//             $http.get('/wordpress/wp-json/users/me')
-//                 .success(function (response) {
-//                     console.log("GET success!(in HomeService)");
-//                     console.log('response.username(from wp)(in HomeService)', response.username);
-//                     console.log('response.ID(from wp)(in HomeService)', response.ID);
-//                     console.log(response);
-//                     callback(response);
-//                 })
-//                .error(function() {
-//                     console.log("GET failed");
-
-//                 });
-//            };
-
-//         // service.SetCredentials = function (username, password) {
-//         //     var authdata = Base64.encode(username + ':' + password);
-//         //     //console.log(authdata);
-//         //     $rootScope.globals = {
-//         //         currentUser: {
-//         //             username: username,
-//         //             authdata: authdata
-//         //         }
-//         //     };
-
-//         //     $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
-//         //     $cookieStore.put('globals', $rootScope.globals);
-//         //     console.log('authdata= ", authdata');
-//         // };
-
-//         // service.ClearCredentials = function () {
-//         //     $rootScope.globals = {};
-//         //     $cookieStore.remove('globals');
-//         //     $http.defaults.headers.common.Authorization = 'Basic ';
-//         //     //alert('hey');
-//         // };
-
-//         service.StoreUser = function () {
-//             alert('Hi');
-//             //alert('hey');
-//         };
-
-
-//         return service;
-
-
-//     }]);

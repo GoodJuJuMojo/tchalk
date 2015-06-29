@@ -1,11 +1,11 @@
 ﻿'use strict';
 
 // declare modules
-angular.module('Authentication', []);
+angular.module('Login', []);
 angular.module('Home', []);
 
 angular.module('testAuth', [
-    'Authentication',
+    'Login',
     'Home',
     'ngRoute',
     'ngCookies'
@@ -16,7 +16,7 @@ angular.module('testAuth', [
     $routeProvider
         .when('/login', {
             controller: 'LoginController',
-            templateUrl: 'modules/authentication/login.html'
+            templateUrl: 'modules/login/login.html'
         })
 
         .when('/', {
