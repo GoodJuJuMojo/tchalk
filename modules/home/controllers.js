@@ -9,15 +9,15 @@ angular.module('Home')
 //     }]);
 
 .controller('HomeController',
-    ['$scope', '$location', 'HomeService',
-    function ($scope, $location, HomeService) {
+    ['$scope', '$rootScope', '$location', 'HomeService',
+    function ($scope, $rootScope, $location, HomeService) {
 
-  
+        console.log('in HC', $scope.userid);
         $scope.data = function () {
             //$scope.dataLoading = true;
             //HomeService.SetCredentials($scope.username, $scope.password);
-            console.log('...in controller HomeController.. ', $scope.username);
-            HomeService.getUser( function (response) {
+            console.log('...in controller HomeController.. ', $rootScope.globals.currentUser);
+            HomeService.getUser($rootScope.globals.currentUser.userid, function (response) {
             //     if (response.username === $scope.username) {
             	console.log("...yes........");
             	console.log('r', response);

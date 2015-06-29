@@ -16,12 +16,12 @@ angular.module('testAuth', [
     $routeProvider
         .when('/login', {
             controller: 'LoginController',
-            templateUrl: 'modules/authentication/views/login.html'
+            templateUrl: 'modules/authentication/login.html'
         })
 
         .when('/', {
             controller: 'HomeController',
-            templateUrl: 'modules/home/views/home.html'
+            templateUrl: 'modules/home/home.html'
         })
 
         .otherwise({ redirectTo: '/login' });

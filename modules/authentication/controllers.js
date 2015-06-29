@@ -11,12 +11,12 @@ angular.module('Authentication')
 
         $scope.login = function () {
             $scope.dataLoading = true;
-            AuthenticationService.SetCredentials($scope.username, $scope.password);
-            console.log('...in controller LoginController ', $scope.username);
-            AuthenticationService.Login($scope.username, $scope.password, function (response) {
+            AuthenticationService.SetCredentials($scope.username, $scope.password, $scope.userid);
+            console.log('...in controller LoginController ', $scope.username, $scope.userid);
+            AuthenticationService.Login($scope.username, $scope.password, $scope.userid, function (response) {
                 if (response.username === $scope.username) {
                     console.log("...yes........");
-                    AuthenticationService.SetCredentials($scope.username, $scope.password);
+                    AuthenticationService.SetCredentials($scope.username, $scope.password, $scope.userid);
                     $location.path('/');
                 } else {
                     console.log("...no........");
